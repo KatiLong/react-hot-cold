@@ -23,7 +23,10 @@ function TopNav(props) {
             href="#feedback"
             className="new"
             aria-label="Start a new game"
-            onClick={() => props.dispatch(onRestartGame(Math.random() * 100) + 1)}
+            onClick={() =>
+                props.dispatch(
+                    onRestartGame(Math.floor(Math.random() * 100) + 1)
+            )}
           >
             + New Game
           </a>

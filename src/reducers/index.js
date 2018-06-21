@@ -11,25 +11,26 @@ export const Reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'RESTART_GAME':
-            return {
-                ...state,
-                correctAnswer: action.correctAnswer
-            };
+            return Object.assign({}, state, {
+                guesses: [],
+                feedback: 'Make your guess!',
+                auralStatus: '',
+                correctAnswer: Math.round(Math.random() * 100) + 1
+            });
         case 'MAKE_GUESS':
 
             let guess, feedback2;
 
-            guess = parseInt(guess, 10);
+            guess = parseInt(action.guess, 10);
+
             if (isNaN(guess)) {
-                this.setState({ feedback: 'Please enter a valid number' });
-                return {
-                    ...state,
-                    feedback: feedback2,
+                return Object.assign({}, state, {
+                    feedback: 'Please enter a valid number' ,
                     guesses: [...state.guesses, guess]
-                }
+                })
             }
 
-            const difference = Math.abs(guess - this.state.correctAnswer);
+            const difference = Math.abs(guess - state.correctAnswer);
 
             if (difference >= 50) {
                 feedback2 = 'You\'re Ice Cold...';
